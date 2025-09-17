@@ -3,6 +3,9 @@ from typing import Generator
 from fastapi import HTTPException
 from supabase import Client, create_client
 
+from data_api.utils import Embedding
+
+
 if os.path.exists(".env"):
     from dotenv import load_dotenv
     load_dotenv()
@@ -17,3 +20,16 @@ if not all([SUPABASE_KEY, SUPABASE_URL]):
 def get_supabase() -> Generator[Client, None, None]:
     client: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
     yield client
+
+
+def save_vectors(embeddings:list[Embedding], table="knowledgebase"):
+    client = get_supabase()
+    rows = []
+    for e in embeddings:
+        data = {
+            "meta":e.meta,
+            "text": e.chunk_text,
+            "embedding": e.vector
+        }
+        rows.append(data)
+    res = next(client).table(table).insert(rows).execute()

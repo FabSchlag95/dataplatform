@@ -1,4 +1,4 @@
-# First steps for setting up and filling the data_platform
+# First steps for setting up and filling the data platform
 ## 1. Setting up the project
 - Clone the code from the Github repository to the desired destination
 - Open the project and run the following commands:

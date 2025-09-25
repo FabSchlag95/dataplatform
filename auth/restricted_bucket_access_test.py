@@ -1,7 +1,6 @@
 import os
-import requests
 from dotenv import load_dotenv
-from supabase import create_client, Client
+from supabase import create_client
 
 load_dotenv()
 
@@ -10,31 +9,26 @@ PASSWORD = "Test" # adjust if necessary
 AUTHORIZED_BUCKET_NAME = "example-knowledge-organisation-a" # adjust if necessary
 UNAUTHORIZED_BUCKET_NAME = "example-knowledge-organisation-b" # adjust if necessary
 
-SUPABASE_URL = os.getenv("SUPABASE_PUBLIC_URL")
-ANON_KEY = os.getenv("ANON_KEY")
+URL = os.getenv("SUPABASE_PUBLIC_URL")
+KEY = os.getenv("ANON_KEY")
 
-supabase: Client = create_client(SUPABASE_URL, ANON_KEY)
+client = create_client(URL,KEY)
 
 # Authentification: User Login
-auth_res = supabase.auth.sign_in_with_password({
-    "email": EMAIL,
-    "password": PASSWORD
-})
-print(f"Logged in user: {auth_res.user.id}")
-access_token = auth_res.session.access_token
+user = client.auth.sign_in_with_password({
+            "email": EMAIL,
+            "password": PASSWORD
+        })
+token = user.session.access_token
+client.auth.set_session(token, "")
 
 # Accessing restricted buckets
-STORAGE_URL = f"{SUPABASE_URL}/storage/v1/object/list/"
-headers = {
-    "Authorization": f"Bearer {access_token}"
-}
-
 def access_bucket(bucket_name):
-    url = f"{SUPABASE_URL}/{bucket_name}"
-    print(f"Request URL: {url}")
-    res = requests.get(url, headers=headers)
-    print(f"Status: {res.status_code}")
-    print(res.json())
+    try:
+        bucket = client.storage.get_bucket(bucket_name)
+        print(bucket)
+    except Exception as e:
+        print(e.args)
 
 access_bucket(AUTHORIZED_BUCKET_NAME)
 access_bucket(UNAUTHORIZED_BUCKET_NAME)

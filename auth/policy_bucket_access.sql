@@ -1,9 +1,9 @@
 -- SELECT
 CREATE POLICY "select access policy for bucket example-knowledge-organisation-a"
-ON storage.objects FOR SELECT
+ON storage.buckets FOR SELECT
 USING (
 	-- adjust restricted bucket name
-    bucket_id = 'example-knowledge-organisation-a'
+    id = 'example-knowledge-organisation-a'
     -- adjust authorised users' IDs
     AND (select auth.uid()::text) IN (
         '455d3943-7a3f-4155-8761-90c4a3d25e4e',
@@ -13,10 +13,10 @@ USING (
 
 -- INSERT
 CREATE POLICY "insert access policy for bucket example-knowledge-organisation-a"
-ON storage.objects FOR INSERT
+ON storage.buckets FOR INSERT
 USING (
 	-- adjust restricted bucket name
-    bucket_id = 'example-knowledge-organisation-a'
+    id = 'example-knowledge-organisation-a'
     -- adjust authorised users' IDs
     AND (select auth.uid()::text) IN (
         '455d3943-7a3f-4155-8761-90c4a3d25e4e',
@@ -26,10 +26,10 @@ USING (
 
 -- UPDATE
 CREATE POLICY "update access policy for bucket example-knowledge-organisation-a"
-ON storage.objects FOR UPDATE
+ON storage.buckets FOR UPDATE
 USING (
 	-- adjust restricted bucket name
-    bucket_id = 'example-knowledge-organisation-a'
+    id = 'example-knowledge-organisation-a'
     -- adjust authorised users' IDs
     AND (select auth.uid()::text) IN (
         '455d3943-7a3f-4155-8761-90c4a3d25e4e',
@@ -39,10 +39,10 @@ USING (
 
 -- DELETE   
 CREATE POLICY "delete access policy for bucket example-knowledge-organisation-a"
-ON storage.objects FOR DELETE
+ON storage.buckets FOR DELETE
 USING (
 	-- adjust restricted bucket name
-    bucket_id = 'example-knowledge-organisation-a'
+    id = 'example-knowledge-organisation-a'
     -- adjust authorised users' IDs
     AND (select auth.uid()::text) IN (
         '455d3943-7a3f-4155-8761-90c4a3d25e4e',

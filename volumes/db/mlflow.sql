@@ -1,0 +1,2 @@
+CREATE SCHEMA IF NOT EXISTS mlflow AUTHORIZATION supabase_admin;
+GRANT USAGE, CREATE ON SCHEMA mlflow TO supabase_admin;

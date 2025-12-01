@@ -1,0 +1,7 @@
+.git
+.env
+.env*
+volumes/db/data
+volumes/storage
+docker-compose.s3.yml
+nginx-*

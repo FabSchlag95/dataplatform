@@ -475,8 +475,13 @@ services:
     #   - "5432:5432"
     restart: unless-stopped
     volumes:
-      # this adds the mlflow schema for mlflow to work
-      - ./volumes/db/mlflow.sql:/docker-entrypoint-initdb.d/20-mlflow.sql:ro
+      # new, custom volumes
+      - ./volumes/db/creator.sql:/docker-entrypoint-initdb.d/20-creator.sql:ro
+      - ./volumes/db/llm.sql:/docker-entrypoint-initdb.d/21-llm.sql:ro
+      - ./volumes/db/playground.sql:/docker-entrypoint-initdb.d/22-playground.sql:ro
+      - ./volumes/db/mlflow.sql:/docker-entrypoint-initdb.d/23-mlflow.sql:ro
+      ## Old
+      ########################
       - ./volumes/db/realtime.sql:/docker-entrypoint-initdb.d/migrations/99-realtime.sql:Z
       # Must be superuser to create event trigger
       - ./volumes/db/webhooks.sql:/docker-entrypoint-initdb.d/init-scripts/98-webhooks.sql:Z

@@ -471,8 +471,8 @@ services:
   db:
     container_name: supabase-db
     image: supabase/postgres:15.8.1.085
-    # ports:
-    #   - "5432:5432"
+    ports:
+      - "54322:5432"
     restart: unless-stopped
     volumes:
       ## Old

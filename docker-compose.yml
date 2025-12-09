@@ -31,7 +31,7 @@ services:
       --serve-artifacts
       --artifacts-destination s3://stub/mlflow
       --static-prefix /mlflow
-      --allowed-hosts ${SERVER_DOMAIN}
+      --allowed-hosts ${SERVER_DOMAIN}/mlflow
 
   minio:
     image: minio/minio

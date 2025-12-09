@@ -475,8 +475,6 @@ services:
     #   - "5432:5432"
     restart: unless-stopped
     volumes:
-      # new, custom volumes
-      - ./volumes/db/mlflow.sql:/docker-entrypoint-initdb.d/20-mlflow.sql:ro
       ## Old
       ########################
       - ./volumes/db/realtime.sql:/docker-entrypoint-initdb.d/migrations/99-realtime.sql:Z
@@ -496,6 +494,9 @@ services:
       - ./volumes/db/pooler.sql:/docker-entrypoint-initdb.d/migrations/99-pooler.sql:Z
       # Use named volume to persist pgsodium decryption key between restarts
       - db-config:/etc/postgresql-custom
+      #############
+      # new, custom volumes
+      - ./volumes/db/mlflow.sql:/docker-entrypoint-initdb.d/99-mlflow.sql:Z
     healthcheck:
       test:
         [

@@ -477,6 +477,7 @@ services:
     volumes:
       # new, custom volumes
       - ./volumes/db/mlflow.sql:/docker-entrypoint-initdb.d/20-mlflow.sql:ro
+      - ./volumes/db/scalec_init.sql:/docker-entrypoint-initdb.d/20-scalec_init.sql:ro
       ## Old
       ########################
       - ./volumes/db/realtime.sql:/docker-entrypoint-initdb.d/migrations/99-realtime.sql:Z

@@ -477,9 +477,6 @@ services:
     volumes:
       # new, custom volumes
       - ./volumes/db/mlflow.sql:/docker-entrypoint-initdb.d/20-mlflow.sql:ro
-      # - ./volumes/db/creator.sql:/docker-entrypoint-initdb.d/20-creator.sql:ro
-      # - ./volumes/db/llm.sql:/docker-entrypoint-initdb.d/21-llm.sql:ro
-      # - ./volumes/db/playground.sql:/docker-entrypoint-initdb.d/22-playground.sql:ro
       ## Old
       ########################
       - ./volumes/db/realtime.sql:/docker-entrypoint-initdb.d/migrations/99-realtime.sql:Z

@@ -31,7 +31,7 @@ services:
       --serve-artifacts
       --artifacts-destination s3://stub/mlflow
       --static-prefix /mlflow
-      --allowed-hosts ${SERVER_DOMAIN}/mlflow
+      --allowed-hosts ${SERVER_DOMAIN},localhost,127.0.0.1
 
   minio:
     image: minio/minio
@@ -45,7 +45,7 @@ services:
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PW}
-      MINIO_SERVER_URL: ${SERVER_DOMAIN}/minio/
+      MINIO_SERVER_URL: http://${SERVER_DOMAIN}/minio/
     ports:
       - "9000:9000"
       - "9001:9001"

@@ -29,7 +29,7 @@ services:
       --backend-store-uri "postgresql+psycopg2://supabase_admin:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/postgres?sslmode=disable&options=-c%20search_path%3Dmlflow"
       --host 0.0.0.0
       --serve-artifacts
-      --artifacts-destination s3://stub/mlflow
+      --artifacts-destination s3://mlflow
       --static-prefix /mlflow
       --allowed-hosts ${SERVER_DOMAIN},localhost,127.0.0.1
 
@@ -61,7 +61,6 @@ services:
       /bin/sh -c "
       /usr/bin/mc alias set minio-admin http://minio:9000 ${MINIO_ROOT_USER} ${MINIO_ROOT_PW};
       /usr/bin/mc mb minio/stub;
-      /usr/bin/mc mb minio/stub/mlfow;
       exit 0;
       "
 
